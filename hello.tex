@@ -1,0 +1,73 @@
+\documentclass{article}
+  \renewcommand\thesubsection{\alph{subsection}}
+  \usepackage{listings}
+  \usepackage{enumerate}
+  \usepackage{amsmath, amsthm, amssymb}
+  \usepackage{CJK}
+  \usepackage{graphicx}
+  \usepackage{subfloat}
+  \usepackage{ulem}
+  \usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+    \title{Homework 1}                   %———总标题
+    \author{Hu Bin\\7297853}
+    \date{}
+ \begin{document}
+    \maketitle                                  % —— 显示标题
+     %\tableofcontents                               %—— 制作目录(目录是根据标题自动生成的)
+
+
+    \section{Problem 1}                      %——一号子标题,星号*取消section数字编号
+
+      \subsection{}                      %——二号子标题 
+      In matlab, I typed the following codes.\\
+        \lstset{language=Matlab}
+        \begin{lstlisting}
+          x = pi;
+          y = sin(10^4*x)/x
+        
+
+        \end{lstlisting}
+        y = -1.5460e-13\\
+        The numerical arpproximation error is -1.5460e-13. It's because computers store numbers with finit precision,
+        and pi in Matlab is not equal to the real $\pi$ which is with infinite precision.
+
+        \subsection{}
+        Expand sin function as Maclawrin series, we have
+    
+        \begin{align*}
+          f(x) =& \frac{sin(10^4x)}{x}\\
+               =& 10^4-\frac{10^{12} x^2}{3!}+o(x^4)
+        \end{align*}
+        When $x=10^{-10}$, $ f(10^{-10})=10^4-\frac{10^{-8}}{3!}+o(x^4) $ . 
+        The numerical ecaluation error is about $1.6667 \times 10^{-9} $.
+
+    \section{Problem 2}
+      \subsection{}
+        Matlab code as followed:
+        \newpage
+        \begin{lstlisting}[caption = \mcode{my_diff.m}]
+          function out=my_diff(f,x,h)
+            f1=f(x+h);
+            f2=f(x-h);
+            out=(f1-f2)./(2*h);
+          end
+        \end{lstlisting}
+      \subsection{}
+        \begin{lstlisting}[caption = \mcode{Problem 2 answer}]
+          my_func=@(x)exp(x)
+          h=logspace(-15,-1,1000);
+          y=my_diff(my_func,0,h);
+          loglog(h,y)
+          xlabel("h")
+          ylabel("f'(x)")
+        \end{lstlisting}
+
+        \begin{figure}[ht]
+          \centering
+          \includegraphics[width = .8\textwidth]{hw2_2.eps}
+          \caption{this is a figure demo}
+          \label{fig:label}
+        \end{figure}
+
+ \end{document}
